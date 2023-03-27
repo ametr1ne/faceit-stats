@@ -54,8 +54,8 @@ export async function getServerSideProps({ params }) {
     const stats = await PlayerService.getStats(player.player_id);
     const history = await PlayerService.getHistory(player.player_id);
 
-    return { props: { player, stats, history } };
+    return { props: { player: player, stats: stats, history: history } };
   } catch {
-    return { props: null };
+    return { props: { player: null, stats: null, history: null } };
   }
 }

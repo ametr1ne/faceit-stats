@@ -65,8 +65,8 @@ export async function getStaticProps() {
   try {
     const players = await PlayerService.getWorldRating();
 
-    return { props: { players }, revalidate: 30 };
+    return { props: { players: players }, revalidate: 30 };
   } catch {
-    return { props: null };
+    return { props: { players: null } };
   }
 }
