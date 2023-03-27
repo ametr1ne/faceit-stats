@@ -20,18 +20,22 @@ export const HistoryItem = ({ playerId, match }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const { rounds } = await MatchService.getOne(match.match_id);
-      setMatchStats(rounds[0]);
+      try {
+        const { rounds } = await MatchService.getOne(match.match_id);
+        setMatchStats(rounds[0]);
 
-      const teams = rounds[0].teams;
+        const teams = rounds[0].teams;
 
-      teams.map((team) => {
-        team.players.map(async (player) => {
-          if (player.player_id === playerId) {
-            setPlayerStats(player.player_stats);
-          }
+        teams.map((team) => {
+          team.players.map(async (player) => {
+            if (player.player_id === playerId) {
+              setPlayerStats(player.player_stats);
+            }
+          });
         });
-      });
+      } catch {
+        setPlayerStats(null);
+      }
     }
     fetchData();
   }, []);

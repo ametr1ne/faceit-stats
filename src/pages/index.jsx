@@ -35,7 +35,7 @@ export default function Home({ players }) {
       <main className='pt-20 md:pt-40 px-2 md:px-5 pb-20'>
         <div className='wrapper max-w-5xl mx-auto flex flex-col items-center'>
           <div className='text-center'>
-            <h1 className='font-bold text-4xl md:text-5xl mb-10 md:mb-20 max-w-3xl leading-tight mx-auto'>
+            <h1 className='font-bold text-4xl md:text-5xl mb-10 md:mb-20 max-w-3xl md:leading-tight mx-auto'>
               Hello, brother <br /> Here you can check your statistics from FACEIT
             </h1>
             <h2 className='font-bold text-2xl md:text-3xl mb-20 max-w-3xl leading-tight mx-auto'>

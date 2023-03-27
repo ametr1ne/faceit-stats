@@ -1,4 +1,6 @@
 export const HeadBlock = ({ user }) => {
+  const faceitUrl = "https://www.faceit.com/en/players/" + user.nickname;
+
   return (
     <div className='relative head-block flex flex-col md:flex-row items-center justify-between space-y-5 md:space-y-0 mb-6 rounded-xl py-5 px-12 overflow-hidden'>
       {user.cover_image && (
@@ -18,7 +20,7 @@ export const HeadBlock = ({ user }) => {
         <h4>Steam nickname: {user.steam_nickname}</h4>
       </div>
       <a
-        href={user.faceit_url}
+        href={faceitUrl}
         target='_blank'
         className='text-white font-semibold bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg text-sm transition-all duration-500 px-5 py-2.5 text-center'>
         FACEIT Profile

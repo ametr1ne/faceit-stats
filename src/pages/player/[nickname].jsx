@@ -10,21 +10,13 @@ import { Loader } from "@/components/Loader";
 import Head from "next/head";
 
 const Player = ({ player, stats, history }) => {
-  const router = useRouter();
-
-  const [color, setColor] = useState("border-[#EEEEEE]");
-
-  useEffect(() => {
-    if (player.games.csgo.skill_level > 1 && player.games.csgo.skill_level <= 3) {
-      setColor("border-[#1CE400]");
-    } else if (player.games.csgo.skill_level > 3 && player.games.csgo.skill_level <= 7) {
-      setColor("border-[#FFC800]");
-    } else if (player.games.csgo.skill_level > 7 && player.games.csgo.skill_level <= 9) {
-      setColor("border-[#FF6309]");
-    } else if (player.games.csgo.skill_level === 10) {
-      setColor("border-[#FE1F00]");
-    }
-  }, []);
+  if (!player || !stats || !history) {
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <h2 className='text-xl font-bold text-white'>Сould not get data from the server</h2>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -35,7 +27,7 @@ const Player = ({ player, stats, history }) => {
         <div className='max-w-5xl mx-auto'>
           <HeadBlock user={player} />
           <div className='flex gap-3 flex-wrap md:flex-nowrap'>
-            <EloBlock color={color} player={player} />
+            <EloBlock player={player} />
             <RecentStats stats={stats} user={player} history={history} />
           </div>
           <StatsBlock stats={stats.lifetime} />
