@@ -49,9 +49,13 @@ const Player = ({ player, stats, history }) => {
 export default Player;
 
 export async function getServerSideProps({ params }) {
-  const player = await PlayerService.getOne(params.nickname);
-  const stats = await PlayerService.getStats(player.player_id);
-  const history = await PlayerService.getHistory(player.player_id);
+  try {
+    const player = await PlayerService.getOne(params.nickname);
+    const stats = await PlayerService.getStats(player.player_id);
+    const history = await PlayerService.getHistory(player.player_id);
 
-  return { props: { player, stats, history } };
+    return { props: { player, stats, history } };
+  } catch {
+    return { props: null };
+  }
 }

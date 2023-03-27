@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import Link from "next/link";
 import { SearchBlock } from "@/components/SearchBlock";
 import { PlayerService } from "@/services/Player.service";
 import { LeaderboardList } from "@/components/LeaderboardList";
@@ -25,8 +24,6 @@ export default function Home({ players }) {
 
     router.push("/player/" + searchValue);
   };
-
-  console.log(cookieObject);
 
   return (
     <>
@@ -65,7 +62,11 @@ export default function Home({ players }) {
 }
 
 export async function getStaticProps() {
-  const players = await PlayerService.getWorldRating();
+  try {
+    const players = await PlayerService.getWorldRating();
 
-  return { props: { players }, revalidate: 30 };
+    return { props: { players }, revalidate: 30 };
+  } catch {
+    return { props: null };
+  }
 }
