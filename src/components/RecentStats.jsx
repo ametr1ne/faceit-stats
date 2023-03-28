@@ -22,7 +22,7 @@ export const RecentStats = ({ stats, user, history }) => {
     const matchesLength = matches.length;
 
     matches.map(async (match) => {
-      const { rounds } = await MatchService.getOne(match.match_id);
+      const { rounds } = await MatchService.getMatchStats(match.match_id);
 
       const teams = rounds[0].teams;
 

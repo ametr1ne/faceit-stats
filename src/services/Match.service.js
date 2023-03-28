@@ -17,7 +17,7 @@ export const MatchService = {
     });
     return res.data;
   },
-  async getOne(id) {
+  async getMatchStats(id) {
     const res = await axios.get("https://open.faceit.com/data/v4/matches/" + id + "/stats", {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,

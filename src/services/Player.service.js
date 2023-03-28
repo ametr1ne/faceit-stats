@@ -14,7 +14,6 @@ export const PlayerService = {
   },
   async getOneById(id) {
     const res = await axios.get("https://open.faceit.com/data/v4/players/" + id, {
-      mode: "no-cors",
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
       },

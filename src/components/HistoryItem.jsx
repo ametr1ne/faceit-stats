@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { MatchService } from "../services/Match.service";
@@ -5,6 +6,8 @@ import { MatchService } from "../services/Match.service";
 export const HistoryItem = ({ playerId, match }) => {
   const [playerStats, setPlayerStats] = useState(null);
   const [kdColor, setKdColor] = useState("text-white");
+
+  console.log(match);
 
   const [winClassName, setWinClassName] = useState("border-r-red-400 hover:border-r-red-500");
 
@@ -21,7 +24,7 @@ export const HistoryItem = ({ playerId, match }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { rounds } = await MatchService.getOne(match.match_id);
+        const { rounds } = await MatchService.getMatchStats(match.match_id);
         setMatchStats(rounds[0]);
 
         const teams = rounds[0].teams;
@@ -61,50 +64,52 @@ export const HistoryItem = ({ playerId, match }) => {
   }
 
   return (
-    <div
-      className={
-        "history-item w-full py-3 px-5 lg:px-12 rounded-xl flex flex-col md:flex-row border border-r-4 border-zinc-800 items-center transition-all duration-300 bg-zinc-800 gap-5 md:gap-10 " +
-        winClassName
-      }>
-      <div className='match-info text-xs md:text-sm flex md:flex-col space-x-2 md:space-x-0 items-center md:items-start justify-between w-full md:w-52'>
-        <p className='date text-white'>{started_at}</p>
-        <p className='text-white'>
-          Map: <span className='font-medium'>{matchStats.round_stats["Map"]}</span>
-        </p>
-        <p className='text-white'>
-          Score: <span className='font-medium'>{matchStats.round_stats["Score"]}</span>
-        </p>
-      </div>
-      {playerStats ? (
-        <div className='player-stats w-full flex space-x-4 items-center justify-between'>
-          <h4 className='text-md md:text-xl font-semibold md:w-32 flex flex-col'>
-            <span className='text-white text-xs md:text-sm font-medium'>K / D / A</span>
-            <div>
-              <span className='text-blue-500'>{playerStats["Kills"]}</span> /{" "}
-              <span className='text-red-300'>{playerStats["Deaths"]}</span> /{" "}
-              <span>{playerStats["Assists"]}</span>
-            </div>
-          </h4>
-          <h4 className={"font-semibold text-md md:text-xl md:w-20 flex flex-col " + kdColor}>
-            <span className='text-white text-xs md:text-sm font-medium'>K / D</span>{" "}
-            {playerStats["K/D Ratio"]}
-          </h4>
-          <h4 className={"font-semibold text-md md:text-xl md:w-20 flex flex-col"}>
-            <span className='text-white text-xs md:text-sm font-medium'>K / R</span>{" "}
-            {playerStats["K/R Ratio"]}
-          </h4>
-          <div className='flex flex-col font-semibold text-md md:text-xl'>
-            <span className='text-white text-xs md:text-sm font-medium'>HS</span>
-            {playerStats["Headshots"]}
-          </div>
-          <div className='flex flex-col font-semibold text-md md:text-xl'>
-            <span className='text-white text-xs md:text-sm font-medium'>HS %</span>
-            {playerStats["Headshots %"]}
-          </div>
+    <Link href={"/match/" + match.match_id}>
+      <div
+        className={
+          "history-item w-full py-3 px-5 lg:px-12 rounded-xl flex flex-col md:flex-row border border-r-4 border-zinc-800 items-center transition-all duration-300 bg-zinc-800 gap-5 md:gap-10 " +
+          winClassName
+        }>
+        <div className='match-info text-xs md:text-sm flex md:flex-col space-x-2 md:space-x-0 items-center md:items-start justify-between w-full md:w-52'>
+          <p className='date text-white'>{started_at}</p>
+          <p className='text-white'>
+            Map: <span className='font-medium'>{matchStats.round_stats["Map"]}</span>
+          </p>
+          <p className='text-white'>
+            Score: <span className='font-medium'>{matchStats.round_stats["Score"]}</span>
+          </p>
         </div>
-      ) : (
-        <p className='w-full text-sm md:text-md'>Stats is not available for this match</p>
-      )}
-    </div>
+        {playerStats ? (
+          <div className='player-stats w-full flex space-x-4 items-center justify-between'>
+            <h4 className='text-md md:text-xl font-semibold md:w-32 flex flex-col'>
+              <span className='text-white text-xs md:text-sm font-medium'>K / D / A</span>
+              <div>
+                <span className='text-blue-500'>{playerStats["Kills"]}</span> /{" "}
+                <span className='text-red-300'>{playerStats["Deaths"]}</span> /{" "}
+                <span>{playerStats["Assists"]}</span>
+              </div>
+            </h4>
+            <h4 className={"font-semibold text-md md:text-xl md:w-20 flex flex-col " + kdColor}>
+              <span className='text-white text-xs md:text-sm font-medium'>K / D</span>{" "}
+              {playerStats["K/D Ratio"]}
+            </h4>
+            <h4 className={"font-semibold text-md md:text-xl md:w-20 flex flex-col"}>
+              <span className='text-white text-xs md:text-sm font-medium'>K / R</span>{" "}
+              {playerStats["K/R Ratio"]}
+            </h4>
+            <div className='flex flex-col font-semibold text-md md:text-xl'>
+              <span className='text-white text-xs md:text-sm font-medium'>HS</span>
+              {playerStats["Headshots"]}
+            </div>
+            <div className='flex flex-col font-semibold text-md md:text-xl'>
+              <span className='text-white text-xs md:text-sm font-medium'>HS %</span>
+              {playerStats["Headshots %"]}
+            </div>
+          </div>
+        ) : (
+          <p className='w-full text-sm md:text-md'>Stats is not available for this match</p>
+        )}
+      </div>
+    </Link>
   );
 };
