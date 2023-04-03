@@ -2,6 +2,8 @@
 
 This is a [Next.js](https://nextjs.org/) project for check your game stats from [FACEIT](https://faceit.com)
 
+DEMO: https://faceit-stats-ametr1ne.vercel.app
+
 ## Getting Started
 
 First, run the development server:
