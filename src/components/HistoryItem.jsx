@@ -7,8 +7,6 @@ export const HistoryItem = ({ playerId, match }) => {
   const [playerStats, setPlayerStats] = useState(null);
   const [kdColor, setKdColor] = useState("text-white");
 
-  console.log(match);
-
   const [winClassName, setWinClassName] = useState("border-r-red-400 hover:border-r-red-500");
 
   const date = new Date(match.started_at * 1000);

@@ -8,8 +8,10 @@ import { StatsBlock } from "@/components/StatsBlock";
 import { History } from "@/components/History";
 import { Loader } from "@/components/Loader";
 import Head from "next/head";
+import MapsStats from "@/components/MapsStats";
 
 const Player = ({ player, stats, history }) => {
+  console.log(stats, history);
   if (!player || !stats || !history) {
     return (
       <div className='flex items-center justify-center min-h-screen'>
@@ -31,6 +33,7 @@ const Player = ({ player, stats, history }) => {
             <RecentStats stats={stats} user={player} history={history} />
           </div>
           <StatsBlock stats={stats.lifetime} />
+          <MapsStats stats={stats.segments} />
           <History user={player} history={history} />
         </div>
       </div>

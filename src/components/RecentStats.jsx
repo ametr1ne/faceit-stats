@@ -37,7 +37,7 @@ export const RecentStats = ({ stats, user, history }) => {
           assistsCounter += +player.player_stats["Assists"];
 
           setRecentData({
-            avgKills: (killsCounter / matchesLength).toFixed(1),
+            avgKills: (killsCounter / matchesLength).toFixed(),
             avgKD: (kdCounter / matchesLength).toFixed(2),
             avgKR: (krCounter / matchesLength).toFixed(2),
             avgHSPercent: (hsPercentageCounter / matchesLength).toFixed(1),

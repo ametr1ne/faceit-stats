@@ -5,6 +5,7 @@ import Head from "next/head";
 import { TeamService } from "@/services/Team.service";
 
 const Match = ({ match, teams }) => {
+  console.log(match);
   return (
     <>
       <Head>

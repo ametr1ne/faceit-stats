@@ -16,8 +16,8 @@ export const HeadBlock = ({ user }) => {
         <img className='rounded-full' src={"user.png"} width={100} alt='empty_avatar' />
       )}
       <div className='flex-col justify-start items-baseline'>
-        <h2 className='text-3xl text-white font-bold'>{user.nickname}</h2>
-        <h4>Steam nickname: {user.steam_nickname}</h4>
+        <h2 className='text-3xl text-center text-white font-bold'>{user.nickname}</h2>
+        <h4 className='text-center'>Steam nickname: {user.steam_nickname}</h4>
       </div>
       <a
         href={faceitUrl}
